@@ -1,0 +1,5 @@
+{
+  "name": "AI Laptop Comparator",
+  "description": "An AI-powered application that provides detailed, up-to-date comparisons and ratings for laptops based on user queries.",
+  "requestFramePermissions": []
+}
