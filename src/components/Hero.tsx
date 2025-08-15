@@ -78,5 +78,6 @@ export const Hero: React.FC<HeroProps> = ({ onOpenAIFinder }) => {
         </div>
       </div>
     </section>
+  )
   );
 };
