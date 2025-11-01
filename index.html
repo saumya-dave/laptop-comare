@@ -5,22 +5,132 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AI Laptop Comparator</title>
-    <title>LaptopAI - AI-Powered Laptop Comparison</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <style>
+      :root {
+        --font-primary: 'Poppins', sans-serif;
+        --font-serif: 'Playfair Display', serif;
+
+        /* Surface Colors - For backgrounds, cards, etc. */
+        --surface-1: oklch(0.98 0.01 250); /* Main app background */
+        --surface-2: oklch(1 0 0);         /* Card/modal backgrounds (White) */
+        --surface-3: oklch(0.95 0.02 250); /* Subtle hover, pills */
+        --surface-4: oklch(0.90 0.02 250); /* Borders, UI dividers */
+
+        /* Text Colors */
+        --text-1: oklch(0.25 0.04 250);    /* Headings */
+        --text-2: oklch(0.40 0.03 250);    /* Body text */
+        --text-3: oklch(0.55 0.02 250);    /* Muted/placeholder text */
+
+        /* Brand Colors (Violet) */
+        --brand: oklch(0.6 0.2 280);       /* Main brand color */
+        --brand-hover: oklch(0.55 0.2 280); /* Hover state */
+        --brand-text: oklch(0.98 0.01 280);  /* Text on brand background */
+        
+        /* Semantic Colors */
+        --success: oklch(0.65 0.15 150);
+        --success-bg: oklch(0.95 0.05 150);
+        --success-text: oklch(0.5 0.15 150);
+        --error: oklch(0.65 0.2 25);
+        --error-bg: oklch(0.95 0.07 25);
+        --error-text: oklch(0.55 0.2 25);
+        --error-border: oklch(0.9 0.05 25);
+        --warning: oklch(0.8 0.2 90);
+        --warning-bg: oklch(0.95 0.07 90);
+        --warning-text: oklch(0.65 0.2 90);
+        
+        /* Accent color */
+        --accent: oklch(0.65 0.18 230);
+      }
+
+      body {
+        font-family: var(--font-primary);
+        background-color: var(--surface-1);
+        color: var(--text-2);
+      }
+      h1, h2, h3, .font-serif {
+        font-family: var(--font-serif);
+        color: var(--text-1);
+      }
+      .font-sans { font-family: var(--font-primary); }
+
+      /* Custom subtle shadow */
+      .shadow-custom {
+        box-shadow: 0 4px 6px -1px rgba(20, 28, 58, 0.05), 0 2px 4px -2px rgba(20, 28, 58, 0.05);
+      }
+      .hover\:shadow-custom-lg:hover {
+        box-shadow: 0 10px 15px -3px rgba(20, 28, 58, 0.07), 0 4px 6px -4px rgba(20, 28, 58, 0.07);
+      }
+      
       /* For custom scrollbar styling */
       ::-webkit-scrollbar {
         width: 8px;
+        height: 8px;
       }
       ::-webkit-scrollbar-track {
-        background: #1f2937; /* bg-gray-800 */
+        background: var(--surface-3); 
       }
       ::-webkit-scrollbar-thumb {
-        background: #4b5563; /* bg-gray-600 */
+        background: var(--surface-4);
         border-radius: 4px;
       }
       ::-webkit-scrollbar-thumb:hover {
-        background: #6b7280; /* bg-gray-500 */
+        background: oklch(0.75 0.02 250);
+      }
+
+      @keyframes slide-in-fwd {
+        0% {
+          transform: translateZ(-100px) translateY(20px);
+          opacity: 0;
+        }
+        100% {
+          transform: translateZ(0) translateY(0);
+          opacity: 1;
+        }
+      }
+
+      .animate-slide-in {
+        animation: slide-in-fwd 0.6s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+      }
+      
+      @keyframes fade-in {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+
+      .animate-fade-in {
+        animation: fade-in 0.5s ease-in-out both;
+      }
+      
+      @keyframes fade-in-up {
+        0% {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .animate-fade-in-up {
+        animation: fade-in-up 0.5s ease-out both;
+      }
+
+      /* Hide scrollbar for elements with this class */
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
       }
     </style>
   <script type="importmap">
@@ -34,10 +144,8 @@
   }
 }
 </script>
-<link rel="stylesheet" href="/index.css">
 </head>
-  <body class="bg-gray-900">
-  <body class="bg-gray-50">
+  <body>
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
   </body>

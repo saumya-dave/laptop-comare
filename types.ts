@@ -10,6 +10,23 @@ export interface LaptopSpecs {
   gpuBenchmark?: string;
 }
 
+export interface RatingBreakdown {
+    performance: number;
+    value: number;
+    quality: number;
+}
+
+export interface GamingPerformance {
+    "1080p"?: string;
+    "1440p"?: string;
+    quality?: string;
+}
+
+export interface ProductivityPerformance {
+    task: string;
+    score: number;
+}
+
 export interface LaptopComparison {
   model: string;
   brand: string;
@@ -18,6 +35,12 @@ export interface LaptopComparison {
   rating?: number;
   pros?: string[];
   cons?: string[];
+  price?: number;
+  releaseDate?: string;
+  status?: string;
+  ratingBreakdown?: RatingBreakdown;
+  gamingPerformance?: GamingPerformance;
+  productivityPerformance?: ProductivityPerformance[];
 }
 
 export interface GroundingChunk {
@@ -43,4 +66,12 @@ export interface SelectedBenchmark {
     name: string;
     score: number;
     type: 'CPU' | 'GPU';
+}
+
+export interface ComponentAnalysis {
+  name: string;
+  summary: string;
+  specs: Array<{ name: string; value: string }>;
+  strengths: string[];
+  weaknesses: string[];
 }

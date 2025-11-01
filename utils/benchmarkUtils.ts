@@ -7,15 +7,20 @@
 export const parseBenchmarkScore = (benchmarkString?: string): number | null => {
   if (!benchmarkString) return null;
   
-  // This regex finds the last number in the string, ignoring commas.
-  const match = benchmarkString.match(/(\d{1,3}(,\d{3})*|\d+)/g);
-  if (!match) return null;
+  // This regex finds all number-like sequences, including those with commas.
+  const numberRegex = /(\d{1,3}(?:,\d{3})*|\d+)/g;
+  const matches = benchmarkString.match(numberRegex);
   
-  // Get the last number found in the string.
-  const lastNumberStr = match[match.length - 1];
-  
-  // Remove commas and parse as an integer.
-  const score = parseInt(lastNumberStr.replace(/,/g, ''), 10);
-  
-  return isNaN(score) ? null : score;
+  if (!matches) return null;
+
+  const scores = matches
+    .map(str => parseInt(str.replace(/,/g, ''), 10))
+    .filter(num => !isNaN(num));
+
+  if (scores.length === 0) return null;
+
+  // Assume the largest number in the string is the actual benchmark score.
+  // This prevents version numbers (e.g., "v4.0") or other small numbers
+  // from being mistaken for the score.
+  return Math.max(...scores);
 };
