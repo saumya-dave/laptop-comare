@@ -430,23 +430,23 @@ const ComponentBenchmarkView: React.FC<{
 }) => {
   const AnalysisLoader: React.FC = () => (
     <div className="space-y-4 animate-pulse">
-      <div className="h-8 bg-[var(--surface-3)] rounded w-3/4"></div>
-      <div className="h-5 bg-[var(--surface-3)] rounded w-1/2"></div>
+      <div className="h-8 bg-[var(--surface-3)] rounded-lg w-3/4"></div>
+      <div className="h-5 bg-[var(--surface-3)] rounded-lg w-1/2"></div>
       <div className="space-y-2 pt-4">
-        <div className="h-4 bg-[var(--surface-3)] rounded w-full"></div>
-        <div className="h-4 bg-[var(--surface-3)] rounded w-full"></div>
-        <div className="h-4 bg-[var(--surface-3)] rounded w-5/6"></div>
+        <div className="h-4 bg-[var(--surface-3)] rounded-lg w-full"></div>
+        <div className="h-4 bg-[var(--surface-3)] rounded-lg w-full"></div>
+        <div className="h-4 bg-[var(--surface-3)] rounded-lg w-5/6"></div>
       </div>
       <div className="grid grid-cols-2 gap-4 pt-4">
         <div className="space-y-2">
-          <div className="h-5 bg-[var(--surface-3)] rounded w-1/3"></div>
-          <div className="h-4 bg-[var(--surface-3)] rounded w-full"></div>
-          <div className="h-4 bg-[var(--surface-3)] rounded w-full"></div>
+          <div className="h-5 bg-[var(--surface-3)] rounded-lg w-1/3"></div>
+          <div className="h-4 bg-[var(--surface-3)] rounded-lg w-full"></div>
+          <div className="h-4 bg-[var(--surface-3)] rounded-lg w-full"></div>
         </div>
         <div className="space-y-2">
-          <div className="h-5 bg-[var(--surface-3)] rounded w-1/3"></div>
-          <div className="h-4 bg-[var(--surface-3)] rounded w-full"></div>
-          <div className="h-4 bg-[var(--surface-3)] rounded w-full"></div>
+          <div className="h-5 bg-[var(--surface-3)] rounded-lg w-1/3"></div>
+          <div className="h-4 bg-[var(--surface-3)] rounded-lg w-full"></div>
+          <div className="h-4 bg-[var(--surface-3)] rounded-lg w-full"></div>
         </div>
       </div>
     </div>
@@ -455,26 +455,49 @@ const ComponentBenchmarkView: React.FC<{
   if (!componentName) return null
 
   return (
-    <div className="bg-[var(--surface-2)] p-6 sm:p-8 rounded-2xl border border-[var(--surface-4)] shadow-md">
-      <h4 className="font-bold text-xl sm:text-2xl mb-6 sm:mb-8 text-[var(--text-1)]">{title}</h4>
+    <div className="bg-gradient-to-br from-[var(--surface-2)] via-[var(--surface-2)] to-[var(--surface-3)] p-6 sm:p-8 rounded-3xl border border-[var(--surface-4)] shadow-xl">
+      <div className="flex items-center gap-3 mb-6 sm:mb-8">
+        <div className="w-10 h-10 rounded-xl bg-[var(--brand)]/10 flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-[var(--brand)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+          </svg>
+        </div>
+        <h4 className="font-bold text-xl sm:text-2xl text-[var(--text-1)]">{title}</h4>
+      </div>
+
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10">
         {/* Left Side: Analysis */}
-        <div className="animate-fade-in">
+        <div className="animate-fade-in order-2 lg:order-1">
           {isAnalysisLoading ? (
             <AnalysisLoader />
           ) : analysisError ? (
-            <div className="p-5 rounded-lg bg-[var(--error-bg)] text-[var(--error-text)] border border-[var(--error-border)]">
-              <p className="font-semibold">Analysis Failed</p>
-              <p className="text-sm mt-1">{analysisError}</p>
+            <div className="p-6 rounded-xl bg-[var(--error-bg)] text-[var(--error-text)] border border-[var(--error-border)]">
+              <div className="flex items-start gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <div>
+                  <p className="font-semibold mb-1">Analysis Failed</p>
+                  <p className="text-sm">{analysisError}</p>
+                </div>
+              </div>
             </div>
           ) : analysis ? (
             <div>
-              <p className="text-2xl sm:text-3xl font-bold text-[var(--text-1)] leading-tight">{analysis.name}</p>
-              {benchmarkValue && <p className="text-lg sm:text-xl font-semibold text-[var(--brand)] mt-2">{benchmarkValue}</p>}
-              <p className="text-[var(--text-2)] mt-5 mb-7 leading-relaxed">{analysis.summary}</p>
+              <div className="bg-[var(--surface-3)] p-5 rounded-xl mb-6 border border-[var(--surface-4)]">
+                <p className="text-2xl sm:text-3xl font-bold text-[var(--text-1)] leading-tight mb-2">{analysis.name}</p>
+                {benchmarkValue && (
+                  <div className="flex items-center gap-2 mt-3">
+                    <span className="text-xs font-medium text-[var(--text-3)] uppercase tracking-wide">Benchmark Score</span>
+                    <span className="text-lg sm:text-xl font-bold text-[var(--brand)]">{benchmarkValue}</span>
+                  </div>
+                )}
+              </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-7">
-                <div>
+              <p className="text-[var(--text-2)] mb-7 leading-relaxed text-sm sm:text-base">{analysis.summary}</p>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div className="bg-[var(--success-bg)] p-5 rounded-xl border border-[var(--success)]/20">
                   <h5 className="font-semibold text-[var(--text-1)] mb-4 flex items-center gap-2">
                     <ThumbsUpIcon /> Strengths
                   </h5>
@@ -482,12 +505,12 @@ const ComponentBenchmarkView: React.FC<{
                     {analysis.strengths.map((item, i) => (
                       <li key={i} className="flex items-start gap-2.5">
                         <CheckIcon className="w-4 h-4 mt-0.5 shrink-0" />
-                        <span className="leading-relaxed">{item}</span>
+                        <span className="leading-relaxed text-[var(--text-2)]">{item}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
-                <div>
+                <div className="bg-[var(--error-bg)] p-5 rounded-xl border border-[var(--error)]/20">
                   <h5 className="font-semibold text-[var(--text-1)] mb-4 flex items-center gap-2">
                     <ThumbsDownIcon /> Weaknesses
                   </h5>
@@ -495,7 +518,7 @@ const ComponentBenchmarkView: React.FC<{
                     {analysis.weaknesses.map((item, i) => (
                       <li key={i} className="flex items-start gap-2.5">
                         <XIcon className="w-4 h-4 mt-0.5 shrink-0" />
-                        <span className="leading-relaxed">{item}</span>
+                        <span className="leading-relaxed text-[var(--text-2)]">{item}</span>
                       </li>
                     ))}
                   </ul>
@@ -503,12 +526,17 @@ const ComponentBenchmarkView: React.FC<{
               </div>
             </div>
           ) : (
-            <p className="text-[var(--text-3)]">No analysis available for this component.</p>
+            <div className="flex flex-col items-center justify-center text-[var(--text-3)] py-12">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 mb-3 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <p className="text-sm font-medium">No analysis available for this component</p>
+            </div>
           )}
         </div>
 
         {/* Right Side: Chart */}
-        <div>
+        <div className="order-1 lg:order-2">
           {baseBenchmark && (
             <BenchmarkChart
               isLoading={isChartLoading}
